@@ -10,11 +10,11 @@
 <body>
     <nav tag="navigation_bar" class="navigation_bar">
         <div tag="logo" class="logo">
-            <img class="menu_icon" src="assets/images/menu-regular-24.png"></i>
+            <img class="menu_icon" src="assets/images/menu-regular-24.png" onclick="toggle_sidebar()"></i>
             <span class="logo_name">Your Todos</span>
         </div>
     </nav>
-    <div tag="side_bar" class="side_bar">
+    <div tag="side_bar" class="side_bar" id="side_bar">
         <img class="plus_list_icon" src="assets/images/plus-regular-24.png"></i>
         <ul class="lists">
         </ul>
@@ -22,5 +22,17 @@
     <div tag="main_container" class="main_container">
 
     </div>
+
+    <script>
+        let sidebar = document.getElementById('side_bar');
+
+        let isSideBarOpen = false;
+
+        function toggle_sidebar() {
+            isSideBarOpen = !isSideBarOpen;
+            
+            sidebar.classList.toggle("open");
+        }
+    </script>
 </body>
 </html>

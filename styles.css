@@ -28,11 +28,16 @@ body {
     background: rgb(24, 26, 25);
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     margin-top: 70px;
     height: 100%;
     width: 15%;
     box-shadow: 0 5px 5px rgb(22, 24, 23);
+    transition: all 0.5s ease;
+}
+
+.open {
+    left: 0;
 }
 
 .plus_list_icon {
