@@ -2,6 +2,7 @@
 
 * {
     font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
 .logo_name {
@@ -18,6 +19,31 @@
     padding-top: 1.1%;
     padding-right: 0.5%;
     padding-left: 0.2%;
+}
+
+.main_container {
+    text-align: center;
+    margin-top: 10rem;
+}
+
+.todo_list_container {
+    position: relative;
+    text-align: center;
+
+    height: 20rem;
+    width: 10rem;
+
+    margin-left: 43.3%;
+
+    background-color:rgba(24, 26, 25, 0.2);
+    backdrop-filter: blur(5px);
+    border-style: solid;
+    border-radius: 10px;
+    border-color: rgba(24, 26, 25, 0.5);
+}
+
+.todo_input {
+    -webkit-text-fill-color: black;
 }
 
 body {
@@ -37,6 +63,11 @@ body {
     width: 15%;
     box-shadow: 0 5px 5px rgb(22, 24, 23);
     transition: all 0.5s ease;
+}
+
+button {
+    background-color:rgba(37, 39, 39, 0.2);
+    backdrop-filter: blur(5px);
 }
 
 ::-webkit-scrollbar {
