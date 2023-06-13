@@ -24,16 +24,18 @@
 .main_container {
     text-align: center;
     margin-top: 10rem;
+    align-items: center;
 }
 
 .todo_list_container {
-    position: relative;
-    text-align: center;
+    position: absolute;
+    text-align: left;
 
     height: 20rem;
-    width: 10rem;
+    width: 50rem;
 
-    margin-left: 43.3%;
+    left: 50%;
+    margin-left: -25rem;
 
     background-color:rgba(24, 26, 25, 0.2);
     backdrop-filter: blur(5px);
