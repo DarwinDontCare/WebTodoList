@@ -4,6 +4,8 @@ let next_day_button = document.getElementById("next_day");
 let todo_input = document.getElementById("todo_input");
 let add_todo_button = document.getElementById("add_todo");
 let todo_list_element = document.getElementById("todo_list");
+let moon_image = document.getElementById("moon_img");
+let bg_video = document.getElementById("space_background");
 let date = new Date();
 let current_location = "";
 let current_latitude = 0;
@@ -13,6 +15,14 @@ previous_day_button.addEventListener("click", decrease_day);
 next_day_button.addEventListener("click", increase_day);
 add_todo_button.addEventListener("click", add_todo);
 date_span.textContent = get_current_date();
+
+var interval = setInterval(function(){
+    var countForVideo = document.querySelector("video").readyState;
+    if(countForVideo == 4){
+      document.querySelector("video").play();
+      clearInterval(interval);
+    }
+  },2000);
 
 let current_day_diference = 0;
 
@@ -34,13 +44,16 @@ function get_location(result) {
     let latitude = result["coords"]["latitude"] + "";
 
     current_latitude = result["coords"]["latitude"];
-    current_longitude = result["coords"]["latitude"];
+    current_longitude = result["coords"]["longitude"];
 
     longitude = longitude.split(".")[0] + "." + longitude.split(".")[1].substring(0, 2);
     latitude = latitude.split(".")[0] + "." + latitude.split(".")[1].substring(0, 2);
 
     current_location = latitude + "," + longitude;
     console.log(current_location);
+
+    console.log(current_latitude, current_longitude);
+
     get_moon_phase(current_latitude, current_longitude);
 }
 
@@ -165,74 +178,49 @@ function get_moon_phase(latitude, longitude) {
 
     const getLunarPhase = (dates = new Date(date.getFullYear(), date.getMonth(), date.getDate() + current_day_diference)) => {
         const age = getLunarAge(dates);
-        if (age < 1)
-          return "New";
-        else if (age < 6)
+        if (age < 6.52923262990685)
           return "Waxing Crescent";
-        else if (age < 9)
+        else if (age < 8.529232629905762)
           return "First Quarter";
-        else if (age < 9.91963)
+        else if (age < 14.529232629905854)
           return "Waxing Gibbous";
-        else if (age < 12.61096)
+        else if (age < 15.52923262990699)
           return "Full";
-        else if (age < 26.30228)
+        else if (age < 20.529232629905948)
           return "Waning Gibbous";
         else if (age < 20.99361)
           return "Last Quarter";
         else if (age < 27.68493)
           return "Waning Crescent";
+        else if (age < 29.059821482907303)
+          return "New";
         return "New";
     }
 
-    let jd = getJulianDate(new Date(date.getFullYear(), date.getMonth(), date.getDate() + current_day_diference));
- 
-    // Calculate the moon's mean longitude
-    let L = (218.316 + 13.176396 * jd) % 360;
+    console.log(getLunarPhase());
 
-    // Calculate the moon's mean anomaly
-    let M = (134.963 + 13.064993 * jd) % 360;
-
-    // Calculate the moon's argument of latitude
-    let F = (93.272 + 13.229350 * jd) % 360;
-
-    // Calculate the moon's ecliptic latitude and longitude
-    let l = L + 6.289 * Math.sin(degToRad(M));
-    let b = 5.128 * Math.sin(degToRad(F));
-    let r = 385001 - 20905 * Math.cos(degToRad(M));
-
-    // Calculate the moon's equatorial coordinates
-    let obl = 23.439 - 0.0000004 * jd;
-    let x = r * Math.cos(degToRad(l));
-    let y = r * Math.cos(degToRad(obl)) * Math.sin(degToRad(l));
-    let z = r * Math.sin(degToRad(obl)) * Math.sin(degToRad(l));
-
-    // Calculate the moon's right ascension and declination
-    let ra = Math.atan2(y, x);
-    let dec = Math.asin(z / r);
-
-    // Calculate the moon's phase angle
-    let lst = (100.46 + 0.985647352 * jd + longitude) % 360;
-    let ha = (lst - ra) % 360;
-    let phase_angle = radToDeg(Math.acos(Math.sin(degToRad(latitude)) * Math.sin(degToRad(dec)) + Math.cos(degToRad(latitude)) * Math.cos(degToRad(dec)) * Math.cos(degToRad(ha))));
-
-    console.log(phase_angle);
-
-    // Determine the phase of the moon
-    let moon_phase = () => {
-        if (phase_angle < 40.45219687299393) return "Third Quarter";
-        else if (phase_angle < 38.97302550297881) return "Waning Crescent";
-        else if (phase_angle < 44.30537803075693) return "Waning Gibbous";
-        else if (phase_angle < 45.09064045201295) return "Full Moon";
-        else if (phase_angle < 49.66329584557519) return "Waxing Gibbous";
-        else if (phase_angle < 51.118969848435746) return "First Quarter";
-        else if (phase_angle < 61.85157598461518) return "Waxing Crescent";
-        else if (phase_angle < 63) return "New Moon";
-        else return "Full Moon";
-    }
-
-    console.log(moon_phase());
+    set_moon_image(getLunarPhase());
 
     return getLunarPhase();
+}
+
+function set_moon_image(moon_phase) {
+    if (moon_phase == "Waxing Crescent")
+        moon_image.src = "../assets/images/waxing_crescent.png";
+    else if (moon_phase == "First Quarter")
+        moon_image.src = "../assets/images/first_quarter.png";
+    else if (moon_phase == "Waxing Gibbous")
+        moon_image.src = "../assets/images/waxing_gibbous.png";
+    else if (moon_phase == "Full")
+        moon_image.src = "../assets/images/full_moon.png";
+    else if (moon_phase == "Waning Gibbous")
+        moon_image.src = "../assets/images/waning_gibbous.png";
+    else if (moon_phase == "Last Quarter")
+        moon_image.src = "../assets/images/third_quarter.png";
+    else if (moon_phase == "Waning Crescent")
+        moon_image.src = "../assets/images/waning_crescent.png";
+    else if (moon_phase == "New")
+        moon_image.src = "../assets/images/new_moon.png";
 }
 
 function degToRad(degrees) {
@@ -248,5 +236,23 @@ function radToDeg(radians) {
 function get_current_date() {
     return date.toLocaleDateString();
 }
+
+let returning = false;
+let posX = -150;
+
+function rotate() {
+    if (posX > 150) returning = true;
+    else if(posX < -150) returning = false;
+
+    if (returning) {
+        moon_image.style.left = posX + "%";
+        posX = posX - 1;
+    } else {
+        moon_image.style.left = posX + "%";
+        posX = posX + 1;
+    }
+    console.log(posX);
+}
+ 
 
 load_todo_list();
