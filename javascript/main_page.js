@@ -110,6 +110,8 @@ function add_todo() {
     }
     create_list_element(todo_input.value);
 
+    store_todos();
+
     todo_input.value = "";
 
     //console.log(todo_list);
@@ -124,6 +126,15 @@ function load_todo_list() {
                 create_list_element(todo_list[i]["list"][l]);
             }
         }
+    }
+}
+
+function load_todo_from_local_storage() {
+    try {
+        todo_list = JSON.parse(localStorage['todos']);
+        console.log(todo_list);
+    } catch {
+        console.log("no data found on local storage");
     }
 }
 
@@ -146,8 +157,9 @@ function remove_todo(event) {
     if (event.target.nodeName === "LI") {
         for (var i = 0; i < todo_list.length; i++) {
             if (todo_list[i]['date'] == date_span.textContent) {
-                todo_list[i]['list'].splice(todo_list[i]['list'].indexOf(event.target.textContent), todo_list[i]['list'].indexOf(event.target.textContent));
+                todo_list[i]['list'].splice(todo_list[i]['list'].indexOf(event.target.textContent), todo_list[i]['list'].indexOf(event.target.textContent) + 1);
                 event.target.remove();
+                localStorage['todos'] = JSON.stringify(todo_list);
                 break;
             }
         }
@@ -155,7 +167,11 @@ function remove_todo(event) {
 }
 
 function store_todos() {
-
+    try {
+        localStorage['todos'] = JSON.stringify(todo_list);
+    } catch {
+        localStorage.setItem('todos', JSON.stringify(todo_list));
+    }
 }
 
 function getClimaInfo(latitude, longitude) {
@@ -297,4 +313,5 @@ var intervalId = window.setInterval(function(){
     rotate();
 }, 10);  
 
+load_todo_from_local_storage();
 load_todo_list();

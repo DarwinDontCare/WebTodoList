@@ -16,13 +16,17 @@
 #moon_phase_text {
     text-align: left;
     position: absolute;
-    left: 30%;
+    width: 20rem;
+    left: 38%;
+    margin-left: -10rem;
 }
 
 #clima_text {
-    text-align: end;
+    text-align: left;
     position: absolute;
-    left: 58.6%;
+    width: 15rem;
+    left: 65%;
+    margin-left: -7.5rem;
 }
 
 .list_item:hover {
