@@ -6,6 +6,8 @@ let add_todo_button = document.getElementById("add_todo");
 let todo_list_element = document.getElementById("todo_list");
 let moon_image = document.getElementById("moon_img");
 let bg_video = document.getElementById("space_background");
+let moon_phase_text = document.getElementById("moon_phase_text");
+let temperature_text = document.getElementById("clima_text");
 let date = new Date();
 let current_location = "";
 let current_latitude = 0;
@@ -36,7 +38,7 @@ function increase_day() {
 
     date_span.textContent = new Date(date.getFullYear(), date.getMonth(), date.getDate() + current_day_diference).toLocaleDateString();
     load_todo_list();
-    get_moon_phase(current_latitude, current_longitude);
+    get_moon_phase();
 }
 
 function get_location(result) {
@@ -54,7 +56,8 @@ function get_location(result) {
 
     console.log(current_latitude, current_longitude);
 
-    get_moon_phase(current_latitude, current_longitude);
+    get_moon_phase();
+    getClimaInfo(latitude, longitude);
 }
 
 function decrease_day() {
@@ -62,7 +65,7 @@ function decrease_day() {
 
     date_span.textContent = new Date(date.getFullYear(), date.getMonth(), date.getDate() + current_day_diference).toLocaleDateString();
     load_todo_list();
-    get_moon_phase(current_latitude, current_longitude);
+    get_moon_phase();
 }
 
 function add_todo() {
@@ -126,7 +129,11 @@ function load_todo_list() {
 
 function create_list_element(content) {
     let li = document.createElement("li");
-    li.textContent = content;
+    li.className = "list_item";
+    li.addEventListener("click", remove_todo);
+    let span = document.createElement("span");
+    span.textContent = content;
+    li.appendChild(span);
 
     todo_list_element.appendChild(li);
 }
@@ -135,22 +142,38 @@ function clear_list_elemnts() {
     todo_list_element.textContent = "";
 }
 
+function remove_todo(event) {
+    if (event.target.nodeName === "LI") {
+        for (var i = 0; i < todo_list.length; i++) {
+            if (todo_list[i]['date'] == date_span.textContent) {
+                todo_list[i]['list'].splice(todo_list[i]['list'].indexOf(event.target.textContent), todo_list[i]['list'].indexOf(event.target.textContent));
+                event.target.remove();
+                break;
+            }
+        }
+    }
+}
+
 function store_todos() {
 
 }
 
-function get_moon_phase(latitude, longitude) {
-    /*let url = 'https://api.qweather.com/v7/astronomy/moon?key=a502876bc7a447d0ae71dd8ca73ce6c7&location=' + current_location + '&date='+date_span.textContent.split("/")[2]+date_span.textContent.split("/")[1]+date_span.textContent.split("/")[0];
+function getClimaInfo(latitude, longitude) {
+    let url = 'https://api.open-meteo.com/v1/forecast?latitude='+latitude+'&longitude='+longitude+'&current_weather=true';
     console.log(url);
     fetch(url)
     .then(response => {
         return response.json();
     }).then(data => {
+        temperature_text.textContent = "Current Temperature: " + data['current_weather']['temperature'] + "°";
         console.log(data);
     })
     .catch(error =>{
         console.log(error);
-    })*/
+    })
+}
+
+function get_moon_phase() {
 
     const getJulianDate = (dates = new Date(date.getFullYear(), date.getMonth(), date.getDate() + current_day_diference)) => {
         const time = dates.getTime();
@@ -197,11 +220,15 @@ function get_moon_phase(latitude, longitude) {
         return "New";
     }
 
-    console.log(getLunarPhase());
+    var phase = getLunarPhase();
 
-    set_moon_image(getLunarPhase());
+    console.log(phase);
 
-    return getLunarPhase();
+    set_moon_image(phase);
+
+    moon_phase_text.textContent = "Moon Phase: " + phase;
+
+    return phase;
 }
 
 function set_moon_image(moon_phase) {
@@ -238,21 +265,36 @@ function get_current_date() {
 }
 
 let returning = false;
-let posX = -150;
 
 function rotate() {
-    if (posX > 150) returning = true;
-    else if(posX < -150) returning = false;
+    current_velocityX = Math.cos(degToRad(current_degree)) * 150;
+    current_velocityY = (Math.sin(degToRad(current_degree)) * 30) + 20;
+    current_size = (5 + (current_velocityY * 0.05));
 
-    if (returning) {
-        moon_image.style.left = posX + "%";
-        posX = posX - 1;
+    moon_image.style.left = current_velocityX + "%";
+    moon_image.style.top = current_velocityY + "%";
+    moon_image.style.width = current_size + "rem";
+    moon_image.style.height = current_size + "rem";
+
+    current_degree += 0.5;
+    current_degree = current_degree % 360;
+
+    if (current_degree < 180) {
+        moon_image.style.zIndex = 2;
     } else {
-        moon_image.style.left = posX + "%";
-        posX = posX + 1;
+        moon_image.style.zIndex = 1;
     }
-    console.log(posX);
 }
- 
+
+var current_velocityX = 0.1;
+var current_velocityY = 0.1;
+
+var current_size = 5;
+
+var current_degree = 0;
+
+var intervalId = window.setInterval(function(){
+    rotate();
+}, 10);  
 
 load_todo_list();
