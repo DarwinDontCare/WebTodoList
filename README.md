@@ -1,5 +1,5 @@
-## Web Clicker
- A Clicker website inspired by Cookie Clicker
+## Todo List
+ A todo list with weather data 
 
 ## Features
- Login an Sign In using firebase with scoreboard and procedural goals
+ Moon phase information, temperature data and Day based lists 
