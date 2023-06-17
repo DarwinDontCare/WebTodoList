@@ -16,15 +16,10 @@ let current_longitude = 0;
 previous_day_button.addEventListener("click", decrease_day);
 next_day_button.addEventListener("click", increase_day);
 add_todo_button.addEventListener("click", add_todo);
+todo_input.addEventListener("keypress", function (event) {
+    if (event.code == "Enter") add_todo();
+})
 date_span.textContent = get_current_date();
-
-var interval = setInterval(function(){
-    var countForVideo = document.querySelector("video").readyState;
-    if(countForVideo == 4){
-      document.querySelector("video").play();
-      clearInterval(interval);
-    }
-  },2000);
 
 let current_day_diference = 0;
 
@@ -113,8 +108,6 @@ function add_todo() {
     store_todos();
 
     todo_input.value = "";
-
-    //console.log(todo_list);
 }
 
 function load_todo_list() {

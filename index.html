@@ -8,8 +8,6 @@
     <title>Todo List</title>
 </head>
 <body>
-    <video autoplay muted loop id="background">
-    </video>
     <nav tag="navigation_bar" class="navigation_bar">
         <div tag="logo" class="logo">
             <img class="menu_icon" src="assets/images/menu-regular-24.png" onclick="toggle_sidebar()"></i>
@@ -23,15 +21,17 @@
         <img src="/assets//images/full_moon.png" id="moon_img" class="moon_img">
         <img src="/assets//images/earth_rotate.gif" id="earth_img" class="earth_img">
     </div>
+    <div tag="text_container" class="text_container">
+        <span id="moon_phase_text"></span>
+        <span id="clima_text"></span>
+    </div>
     <div tag="main_container" class="main_container">
         <input type="text" id="todo_input" class="todo_input">
         <button id="add_todo">+</button>
         <br>
-        <span id="moon_phase_text"></span>
         <button id="previous_day"><</button>
         <span id="date_span"></span>
         <button id="next_day">></button>
-        <span id="clima_text">sdasfasfa</span>
 
         <div id="todo_list_container" class="todo_list_container">
             <ul class="todo_list" id="todo_list">
