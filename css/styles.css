@@ -53,6 +53,11 @@
     width: 5rem;
 }
 
+#moon_container {
+    position: relative;
+    top: 20%;
+}
+
 .menu_icon {
     margin: 0;
     margin-top: 0;

@@ -4,6 +4,7 @@ let next_day_button = document.getElementById("next_day");
 let todo_input = document.getElementById("todo_input");
 let add_todo_button = document.getElementById("add_todo");
 let todo_list_element = document.getElementById("todo_list");
+let moon_image = document.getElementById("moon_img");
 let bg_video = document.getElementById("space_background");
 let moon_phase_text = document.getElementById("moon_phase_text");
 let temperature_text = document.getElementById("clima_text");
@@ -240,7 +241,6 @@ function get_moon_phase() {
 }
 
 function set_moon_image(moon_phase) {
-    let moon_image = document.getElementById("moon_img");
     if (moon_phase == "Waxing Crescent")
         moon_image.src = "../assets/images/waxing_crescent.png";
     else if (moon_phase == "First Quarter")
@@ -276,8 +276,6 @@ function get_current_date() {
 let returning = false;
 
 function rotate() {
-    let moon_image = document.getElementById("moon_img");
-    
     current_velocityX = Math.cos(degToRad(current_degree)) * 150;
     current_velocityY = (Math.sin(degToRad(current_degree)) * 30) + 20;
     current_size = (5 + (current_velocityY * 0.05));
