@@ -241,22 +241,25 @@ function get_moon_phase() {
 }
 
 function set_moon_image(moon_phase) {
+    moon_image = document.getElementById("moon_img");
+    moon_image.className = "desabled_moon_img";
     if (moon_phase == "Waxing Crescent")
-        moon_image.src = "../assets/images/waxing_crescent.png";
+        moon_image = document.getElementById("waxing_crescent");
     else if (moon_phase == "First Quarter")
-        moon_image.src = "../assets/images/first_quarter.png";
+        moon_image = document.getElementById("first_quarter");
     else if (moon_phase == "Waxing Gibbous")
-        moon_image.src = "../assets/images/waxing_gibbous.png";
+        moon_image = document.getElementById("waxing_gibbous");
     else if (moon_phase == "Full")
-        moon_image.src = "../assets/images/full_moon.png";
+        moon_image = document.getElementById("full_moon");
     else if (moon_phase == "Waning Gibbous")
-        moon_image.src = "../assets/images/waning_gibbous.png";
+        moon_image = document.getElementById("waning_gibbous");
     else if (moon_phase == "Last Quarter")
-        moon_image.src = "../assets/images/last_quarter.png";
+        moon_image = document.getElementById("last_quarter");
     else if (moon_phase == "Waning Crescent")
-        moon_image.src = "../assets/images/waning_crescent.png";
+        moon_image = document.getElementById("waning_crescent");
     else if (moon_phase == "New")
-        moon_image.src = "../assets/images/new_moon.png";
+        moon_image = document.getElementById("new_moon");
+    moon_image.className = "moon_img";
 }
 
 function degToRad(degrees) {

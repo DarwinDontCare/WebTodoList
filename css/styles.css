@@ -51,6 +51,15 @@
     top: 50%;
     height: 5rem;
     width: 5rem;
+    visibility: visible;
+}
+
+.desabled_moon_img {
+    position: absolute;
+    top: 50%;
+    height: 5rem;
+    width: 5rem;
+    visibility: hidden;
 }
 
 #moon_container {
