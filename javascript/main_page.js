@@ -13,15 +13,6 @@ let current_location = "";
 let current_latitude = 0;
 let current_longitude = 0;
 
-const waxing_crescent_img = "../assets/images/waxing_crescent.png";
-const waxing_gibbous_img = "../assets/images/waxing_gibbous.png";
-const waning_crescent_img = "../assets/images/waning_crescent.png";
-const waning_gibbous_img = "../assets/images/waning_gibbous.png";
-const full_moon_img = "../assets/images/full_moon.png";
-const new_moon_img = "../assets/images/new_moon.png";
-const first_quarter_img = "../assets/images/first_quarter.png";
-const last_quarter_img = "../assets/images/last_quarter.png";
-
 previous_day_button.addEventListener("click", decrease_day);
 next_day_button.addEventListener("click", increase_day);
 add_todo_button.addEventListener("click", add_todo);
@@ -251,21 +242,21 @@ function get_moon_phase() {
 
 function set_moon_image(moon_phase) {
     if (moon_phase == "Waxing Crescent")
-        moon_image.src = waxing_crescent_img;
+        moon_image.src = "../assets/images/waxing_crescent.png";
     else if (moon_phase == "First Quarter")
-        moon_image.src = first_quarter_img;
+        moon_image.src = "../assets/images/first_quarter.png";
     else if (moon_phase == "Waxing Gibbous")
-        moon_image.src = waxing_gibbous_img;
+        moon_image.src = "../assets/images/waxing_gibbous.png";
     else if (moon_phase == "Full")
-        moon_image.src = full_moon_img;
+        moon_image.src = "../assets/images/full_moon.png";
     else if (moon_phase == "Waning Gibbous")
-        moon_image.src = waning_gibbous_img;
+        moon_image.src = "../assets/images/waning_gibbous.png";
     else if (moon_phase == "Last Quarter")
-        moon_image.src = last_quarter_img;
+        moon_image.src = "../assets/images/last_quarter.png";
     else if (moon_phase == "Waning Crescent")
-        moon_image.src = waning_crescent_img;
+        moon_image.src = "../assets/images/waning_crescent.png";
     else if (moon_phase == "New")
-        moon_image.src = new_moon_img;
+        moon_image.src = "../assets/images/new_moon.png";
 }
 
 function degToRad(degrees) {
