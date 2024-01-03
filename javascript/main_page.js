@@ -13,14 +13,14 @@ let current_location = "";
 let current_latitude = 0;
 let current_longitude = 0;
 
-import waxing_crescent_img from "../assets/images/waxing_crescent.png";
-import waxing_gibbous_img from "../assets/images/waxing_gibbous.png";
-import waning_crescent_img from "../assets/images/waning_crescent.png";
-import waning_gibbous_img from "../assets/images/waning_gibbous.png";
-import full_moon_img from "../assets/images/full_moon.png";
-import new_moon_img from "../assets/images/new_moon.png";
-import first_quarter_img from "../assets/images/first_quarter.png";
-import last_quarter_img from "../assets/images/last_quarter.png";
+const waxing_crescent_img = "../assets/images/waxing_crescent.png";
+const waxing_gibbous_img = "../assets/images/waxing_gibbous.png";
+const waning_crescent_img = "../assets/images/waning_crescent.png";
+const waning_gibbous_img = "../assets/images/waning_gibbous.png";
+const full_moon_img = "../assets/images/full_moon.png";
+const new_moon_img = "../assets/images/new_moon.png";
+const first_quarter_img = "../assets/images/first_quarter.png";
+const last_quarter_img = "../assets/images/last_quarter.png";
 
 previous_day_button.addEventListener("click", decrease_day);
 next_day_button.addEventListener("click", increase_day);
